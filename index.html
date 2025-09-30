@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Super Seniors Youtube Hub</title>
+<link rel="stylesheet" href="styles.css" />
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="scripts.js" defer></script>
+</head>
+<body>
+
+<header>
+  <h1>Super Seniors YouTube Hub</h1>
+  <p>developed by p4rge_</p>
+</header>
+
+<!-- Login/Register Section -->
+<section id="login-section">
+  <h2>Login / Register</h2>
+  <input type="text" id="username" placeholder="Username" />
+  <input type="password" id="password" placeholder="Password" />
+  <button id="btn-login">Login</button>
+  <button id="btn-register">Register</button>
+  <p id="login-message"></p>
+</section>
+
+<!-- Main YouTube Search Section (hidden until login) -->
+<section id="main-section" style="display:none;">
+  <button id="btn-logout" style="float:right; margin: 0.5em;">Logout</button>
+  
+  <h2>YouTube Search</h2>
+  <div style="display:flex; gap: 1em; flex-wrap: wrap; max-width: 600px;">
+    <div style="flex: 1 1 45%;">
+      <label for="channel-query">Channel Search</label><br />
+      <input type="text" id="channel-query" placeholder="Search channels" />
+    </div>
+    <div style="flex: 1 1 45%;">
+      <label for="keyword-query">Keyword Search</label><br />
+      <input type="text" id="keyword-query" placeholder="Search videos in channel or general" />
+    </div>
+  </div>
+  <button id="search-btn" style="margin-top: 1em;">Search</button>
+
+  <div id="youtube-results" style="margin-top:1em;"></div>
+
+  <section id="embed-tab" style="margin-top:2em;">
+    <h3>Embedded Video</h3>
+    <div id="embed-results"></div>
+  </section>
+</section>
+
+</body>
+</html>
