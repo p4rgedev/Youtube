@@ -50,11 +50,22 @@ const loginMessage = document.getElementById('login-message');
 const btnLogin = document.getElementById('btn-login');
 const btnRegister = document.getElementById('btn-register');
 const btnLogout = document.getElementById('btn-logout');
-const youtubeResultsDiv = document.getElementById('youtube-results');
 
+const tabButtons = {
+  search: document.getElementById('tab-search'),
+  embed: document.getElementById('tab-embed')
+};
+const tabs = {
+  search: document.getElementById('youtube-tab'),
+  embed: document.getElementById('embed-tab')
+};
+
+const youtubeResultsDiv = document.getElementById('youtube-results');
 const channelQueryInput = document.getElementById('channel-query');
 const keywordQueryInput = document.getElementById('keyword-query');
 const searchBtn = document.getElementById('search-btn');
+const manualEmbedInput = document.getElementById('manual-embed');
+const embedBtn = document.getElementById('embed-btn');
 
 let selectedChannelId = null;
 
@@ -97,7 +108,11 @@ btnLogout.addEventListener('click', () => {
   loginSection.style.display = 'block';
   clearInputs();
   clearSearchResults();
+  showTab('search');
 });
+
+tabButtons.search.addEventListener('click', () => showTab('search'));
+tabButtons.embed.addEventListener('click', () => showTab('embed'));
 
 function showMain() {
   loginSection.style.display = 'none';
@@ -115,10 +130,18 @@ function clearSearchResults() {
   document.getElementById('embed-results').innerHTML = '';
   channelQueryInput.value = '';
   keywordQueryInput.value = '';
+  manualEmbedInput.value = '';
   selectedChannelId = null;
 }
 
-// YouTube search logic
+function showTab(tab) {
+  Object.keys(tabs).forEach(t => {
+    tabs[t].style.display = (t === tab) ? 'block' : 'none';
+    tabButtons[t].classList.toggle('active', t === tab);
+  });
+}
+
+// YouTube multi-step search
 
 searchBtn.addEventListener('click', async () => {
   if (!currentUser) {
@@ -255,26 +278,56 @@ async function searchVideos(keyword, apiKey, channelId = null) {
     card.appendChild(text);
 
     card.onclick = () => {
-      showEmbeddedVideo(videoId, title);
+      embedVideoById(videoId);
     };
 
     youtubeResultsDiv.appendChild(card);
   });
 }
 
-function showEmbeddedVideo(videoId, title) {
-  const embedDiv = document.getElementById('embed-results');
-  embedDiv.innerHTML = '';
+embedBtn.addEventListener('click', () => {
+  const val = manualEmbedInput.value.trim();
+  if (!val) return alert('Enter a YouTube video URL or ID to embed');
+  const videoId = extractYouTubeVideoID(val);
+  if (!videoId) return alert('Invalid YouTube URL or ID');
+  embedVideoById(videoId);
+});
 
+function embedVideoById(videoId) {
+  const embedDiv = document.getElementById('embed-results');
+
+  // Create iframe with ads disabled
   const iframe = document.createElement('iframe');
   iframe.width = "100%";
   iframe.height = "315";
-  iframe.src = `https://www.youtube.com/embed/${videoId}`;
-  iframe.title = title;
+  iframe.src = `https://www.youtube.com/embed/${videoId}?iv_load_policy=3&rel=0`;
+  iframe.title = "Embedded Video";
   iframe.frameBorder = "0";
   iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
   iframe.allowFullscreen = true;
+
+  embedDiv.innerHTML = ''; // Clear previous embeds
   embedDiv.appendChild(iframe);
+
+  showTab('embed');
+}
+
+function extractYouTubeVideoID(urlOrId) {
+  // If input is just an ID (11 chars), return it
+  if (/^[a-zA-Z0-9_-]{11}$/.test(urlOrId)) return urlOrId;
+
+  // Otherwise try to parse video ID from URL
+  try {
+    const url = new URL(urlOrId);
+    if (url.hostname.includes('youtube.com')) {
+      return url.searchParams.get('v');
+    } else if (url.hostname === 'youtu.be') {
+      return url.pathname.slice(1);
+    }
+  } catch {
+    // Not a valid URL
+  }
+  return null;
 }
 
 async function getActiveApiKey() {
