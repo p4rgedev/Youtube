@@ -32,7 +32,7 @@
   
   <nav>
     <button id="tab-search" class="active">YouTube Search</button>
-    <button id="tab-playing">Playing Video</button>
+    <button id="tab-embed">Embed Videos</button>
   </nav>
 
   <section id="youtube-tab" style="margin-top:1em;">
@@ -49,14 +49,20 @@
     </div>
     <button id="search-btn" style="margin-top: 1em;">Search</button>
 
+    <div style="margin-top: 1em;">
+      <label for="manual-embed">Or enter YouTube video URL/ID to embed:</label><br />
+      <input type="text" id="manual-embed" placeholder="Paste video URL or ID here" style="width: 100%; max-width: 400px;" />
+      <button id="embed-btn" style="margin-top: 0.5em;">Embed Video</button>
+    </div>
+
     <div id="youtube-results" style="margin-top:1em;"></div>
   </section>
 
-  <section id="playing-tab" style="display:none; margin-top:1em;">
-    <h2>Now Playing</h2>
+  <section id="embed-tab" style="display:none; margin-top:1em;">
+    <h2>Embedded Videos</h2>
     <div id="embed-results"></div>
   </section>
 </section>
 
 </body>
-</html
+</html>
