@@ -24,6 +24,27 @@ button:hover {
   cursor: pointer;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  margin: 1em 0;
+  gap: 1em;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  padding: 0.2em 0.5em;
+}
+
+nav button.active {
+  border-bottom: 2px solid #fff;
+}
+
 #youtube-results > div {
   border: 1px solid #555;
   padding: 0.5em;
