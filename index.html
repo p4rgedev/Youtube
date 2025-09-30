@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Super Seniors Youtube Hub</title>
+<title>Super Seniors Central</title>
 <link rel="stylesheet" href="styles.css" />
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -12,7 +12,7 @@
 <body>
 
 <header>
-  <h1>Super Seniors YouTube Hub</h1>
+  <h1>Super Seniors Central</h1>
   <p>developed by p4rge_</p>
 </header>
 
@@ -30,26 +30,33 @@
 <section id="main-section" style="display:none;">
   <button id="btn-logout" style="float:right; margin: 0.5em;">Logout</button>
   
-  <h2>YouTube Search</h2>
-  <div style="display:flex; gap: 1em; flex-wrap: wrap; max-width: 600px;">
-    <div style="flex: 1 1 45%;">
-      <label for="channel-query">Channel Search</label><br />
-      <input type="text" id="channel-query" placeholder="Search channels" />
-    </div>
-    <div style="flex: 1 1 45%;">
-      <label for="keyword-query">Keyword Search</label><br />
-      <input type="text" id="keyword-query" placeholder="Search videos in channel or general" />
-    </div>
-  </div>
-  <button id="search-btn" style="margin-top: 1em;">Search</button>
+  <nav>
+    <button id="tab-search" class="active">YouTube Search</button>
+    <button id="tab-playing">Playing Video</button>
+  </nav>
 
-  <div id="youtube-results" style="margin-top:1em;"></div>
+  <section id="youtube-tab" style="margin-top:1em;">
+    <h2>YouTube Search</h2>
+    <div style="display:flex; gap: 1em; flex-wrap: wrap; max-width: 600px;">
+      <div style="flex: 1 1 45%;">
+        <label for="channel-query">Channel Search</label><br />
+        <input type="text" id="channel-query" placeholder="Search channels" />
+      </div>
+      <div style="flex: 1 1 45%;">
+        <label for="keyword-query">Keyword Search</label><br />
+        <input type="text" id="keyword-query" placeholder="Search videos in channel or general" />
+      </div>
+    </div>
+    <button id="search-btn" style="margin-top: 1em;">Search</button>
 
-  <section id="embed-tab" style="margin-top:2em;">
-    <h3>Embedded Video</h3>
+    <div id="youtube-results" style="margin-top:1em;"></div>
+  </section>
+
+  <section id="playing-tab" style="display:none; margin-top:1em;">
+    <h2>Now Playing</h2>
     <div id="embed-results"></div>
   </section>
 </section>
 
 </body>
-</html>
+</html
