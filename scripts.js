@@ -1,4 +1,3 @@
-Copy
 // Your API keys — cycle through these automatically on errors/quota limits
 const apiKeys = [
   "AIzaSyBoL0xrQEnNSAD1eSXLuLIMLrHmAsmw3ZQ",
