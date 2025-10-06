@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Super Seniors Central</title>
 <link rel="stylesheet" href="styles.css" />
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="scripts.js" defer></script>
 </head>
 <body>
@@ -16,20 +14,7 @@
   <p>developed by p4rge_</p>
 </header>
 
-<!-- Login/Register Section -->
-<section id="login-section">
-  <h2>Login / Register</h2>
-  <input type="text" id="username" placeholder="Username" />
-  <input type="password" id="password" placeholder="Password" />
-  <button id="btn-login">Login</button>
-  <button id="btn-register">Register</button>
-  <p id="login-message"></p>
-</section>
-
-<!-- Main YouTube Search Section (hidden until login) -->
-<section id="main-section" style="display:none;">
-  <button id="btn-logout" style="float:right; margin: 0.5em;">Logout</button>
-  
+<section id="main-section">
   <nav>
     <button id="tab-search" class="active">YouTube Search</button>
     <button id="tab-embed">Embed Videos</button>
