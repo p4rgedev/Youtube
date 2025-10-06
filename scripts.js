@@ -1,3 +1,5 @@
+Copy
+// Your API keys — cycle through these automatically on errors/quota limits
 const apiKeys = [
   "AIzaSyBoL0xrQEnNSAD1eSXLuLIMLrHmAsmw3ZQ",
   "AIzaSyDstZPwfimboVJWSWW-txfej9gPUWR9PiE",
@@ -58,7 +60,7 @@ searchBtn.addEventListener('click', async () => {
 
   try {
     if (channelQuery) {
-      // Search channels first, with API key cycling on error
+      // Search channels first with API key cycling
       await searchWithApiKeyCycle(() => {
         return fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&maxResults=10&q=${encodeURIComponent(channelQuery)}&key=${getCurrentApiKey()}`)
           .then(res => res.json());
@@ -69,7 +71,6 @@ searchBtn.addEventListener('click', async () => {
           // No channels found fallback to video search
           return searchVideos(keywordQuery || channelQuery);
         } else {
-          // Show channel cards
           youtubeResultsDiv.innerHTML = '';
           data.items.forEach(channel => {
             const channelId = channel.snippet.channelId;
@@ -190,7 +191,8 @@ function embedVideoById(videoId) {
   const iframe = document.createElement('iframe');
   iframe.width = "100%";
   iframe.height = "315";
-  iframe.src = `https://www.youtube.com/embed/${videoId}?iv_load_policy=3&rel=0`;
+  // Added parameters to disable ads, annotations, and related videos
+  iframe.src = `https://www.youtube.com/embed/${videoId}?iv_load_policy=3&rel=0&modestbranding=1&showinfo=0&autohide=1&playsinline=1`;
   iframe.title = "Embedded Video";
   iframe.frameBorder = "0";
   iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
